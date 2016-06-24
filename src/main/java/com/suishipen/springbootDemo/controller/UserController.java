@@ -2,6 +2,7 @@ package com.suishipen.springbootDemo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,9 @@ public class UserController {
 	
 	@RequestMapping(value="", method = RequestMethod.PUT)
 	public User update(@RequestBody User user) {
-		return userDao.save(user);
+		User target = userDao.findById(user.getId());
+		BeanUtils.copyProperties(user, target, "account", "infos", "roles");
+		return userDao.save(target);
 	}
 	
 	@RequestMapping(value="/{userId}", method = RequestMethod.DELETE)
@@ -60,7 +63,6 @@ public class UserController {
 	@RequestMapping(value="/{userId}/info", method = RequestMethod.POST)
 	public User addInfos(@PathVariable(value = "userId") String userId, @RequestBody Info info) {
 		User user = userDao.findById(userId);
-		user.getInfos().get(0).setNickname("李四");
 		user.addInfo(info);
 		return userDao.save(user);
 	}

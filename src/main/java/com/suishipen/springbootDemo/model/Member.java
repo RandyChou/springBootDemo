@@ -16,8 +16,8 @@ public class Member {
 	
 	@Id
 	@Column(length=36)
-	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+	@GeneratedValue(generator = "guid")
+    @GenericGenerator(name = "guid", strategy = "guid")
 	private String id;
 	
 	private String name;

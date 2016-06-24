@@ -20,9 +20,9 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(length=32)
-	@GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+	@Column(length=36)
+	@GeneratedValue(generator = "guid")
+    @GenericGenerator(name = "guid", strategy = "guid")
 	private String id;
 	
 	private double amount;
